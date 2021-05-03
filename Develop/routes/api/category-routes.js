@@ -6,53 +6,14 @@ const { Category, Product } = require('../../models');
 router.get('/', async (req, res) => {
   // find all categories
   
-  Category.findAll({
-
-    attributes: ['id', 'category_name'],
-
-    include: [
-      {
-        model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
-      }
-    ]
-
-  })
-    .then(CategoryData => res.json(CategoryData))
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err)
-    })
+ 
 
 });
 
 router.get('/:id', (req, res) => {
   // find one category by its `id` value
   
-  Category.findOne({
-    where: {
-      id: req.params.id
-    },
-    attributes: ['id', 'category_name'],
-    include: [
-      {
-        model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
-      }
-    ]
-  })
-    .then(CategoryData => {
-      if (!CategoryData) {
-        res.status(404).json({ message: 'nothing is found with this id. sorry.'});
-        return
-      }
-      res.json(CategoryData)
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-    
+  
 
 });
 
